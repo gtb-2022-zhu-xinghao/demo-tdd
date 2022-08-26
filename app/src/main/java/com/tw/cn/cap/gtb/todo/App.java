@@ -17,17 +17,9 @@ public class App {
     public List<String> run() {
         final List<Task> tasks = taskRepository.loadTasks();
         final List<String> result = new ArrayList<>();
-        result.add("# To be done");
-        tasks.stream()
-                .filter(task -> !task.isCompleted())
-                .map(Task::format)
-                .forEachOrdered(result::add);
-
-        result.add("# Completed");
-        tasks.stream()
-                .filter(Task::isCompleted)
-                .map(Task::format)
-                .forEachOrdered(result::add);
+        result.addAll(Section.tbd().format(tasks));
+        result.addAll(Section.completed().format(tasks));
         return result;
     }
+
 }
