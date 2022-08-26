@@ -17,14 +17,29 @@ public class App {
     public List<String> run() {
         final List<String> result = new ArrayList<>();
         result.add("# To be done");
-        final List<String> lines = readTasksLines();
-        for (int i = 0; i < lines.size(); i++) {
-            final int id = i + 1;
-            final String[] fields = lines.get(i).split(" ", 2);
-            final String name = fields[1];
-            result.add(String.format("%d %s", id, name));
+        final List<Task> tasks = loadTasks();
+        for(var task: tasks){
+            result.add(task.format());
         }
         return result;
+    }
+
+    private List<Task> loadTasks() {
+        final List<Task> tasks = new ArrayList<>();
+        final List<String> lines = readTasksLines();
+        for (int i = 0; i < lines.size(); i++) {
+            final Task task = createTask(lines, i);
+            tasks.add(task);
+        }
+        return tasks;
+    }
+
+    private Task createTask(List<String> lines, int i) {
+        final int id = i + 1;
+        final String[] fields = lines.get(i).split(" ", 2);
+        final String name = fields[1];
+        final Task task = new Task(id, name);
+        return task;
     }
 
     private List<String> readTasksLines() {
