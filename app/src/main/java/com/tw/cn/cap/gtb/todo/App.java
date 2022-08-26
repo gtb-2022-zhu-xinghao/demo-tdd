@@ -19,7 +19,10 @@ public class App {
         result.add("# To be done");
         final List<String> lines = readTasksLines();
         for (int i = 0; i < lines.size(); i++) {
-            result.add(String.format("%d %s", i + 1, lines.get(i)));
+            final int id = i + 1;
+            final String[] fields = lines.get(i).split(" ", 2);
+            final String name = fields[1];
+            result.add(String.format("%d %s", id, name));
         }
         return result;
     }
