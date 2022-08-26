@@ -15,12 +15,19 @@ public class App {
     }
 
     public List<String> run() {
+        final List<Task> tasks = taskRepository.loadTasks();
         final List<String> result = new ArrayList<>();
         result.add("# To be done");
-        final List<Task> tasks = taskRepository.loadTasks();
-        for(var task: tasks){
-            result.add(task.format());
-        }
+        tasks.stream()
+                .filter(task -> !task.isCompleted())
+                .map(Task::format)
+                .forEachOrdered(result::add);
+
+        result.add("# Completed");
+        tasks.stream()
+                .filter(Task::isCompleted)
+                .map(Task::format)
+                .forEachOrdered(result::add);
         return result;
     }
 }
