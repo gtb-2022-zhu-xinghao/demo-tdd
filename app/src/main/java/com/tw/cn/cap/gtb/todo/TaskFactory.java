@@ -7,9 +7,12 @@ public class TaskFactory {
     private TaskFactory() {
     }
 
-    static Task createTask(String line, int id) {
+   public static Task createTask(String line, int id) {
         final String[] fields = line.split(" ", 2);
         final String name = fields[1];
-        return new Task(id, name);
+        final boolean isCompleted = fields[0].equals("x");
+        return new Task(id, name,isCompleted);
     }
+
+
 }
