@@ -23,6 +23,9 @@ public record Section(String title, boolean flag) {
                 .filter(this::isType)
                 .map(Task::format)
                 .forEachOrdered(result::add);
+        if (result.size() == 1){
+            result.add("Empty");
+        }
         return result;
     }
 
