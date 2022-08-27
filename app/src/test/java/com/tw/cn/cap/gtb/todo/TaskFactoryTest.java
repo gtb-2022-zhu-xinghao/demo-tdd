@@ -10,7 +10,7 @@ class TaskFactoryTest {
         final boolean isCompleted = TaskFactory.createTask("+ foo", 1).isCompleted();
         assertFalse(isCompleted);
     }
-
+    @Test
     void should_support_name_with_multiple_white_spaces() {
         final String result = TaskFactory.createTask("+    foo bar     ", 1).getName();
         assertEquals("   foo bar     ", result);
