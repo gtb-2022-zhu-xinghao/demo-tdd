@@ -1,13 +1,25 @@
 package com.tw.cn.cap.gtb.todo;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AppTest {
+
+    @BeforeEach
+    void setUp() {
+        writeDateFile(List.of(
+                "+ task 01",
+                "+ task 02",
+                "x task 03",
+                "x task 04"));
+    }
+
 
     @Test
     void should_list_existing_tasks() {
@@ -34,4 +46,14 @@ class AppTest {
                         "4 task 04"), result);
     }
 
+    private void writeDateFile(List<String> lines) {
+        try (BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH)) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
