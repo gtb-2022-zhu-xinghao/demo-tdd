@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 class AppTest {
-    final App app = new App();
+    private App app;
 
     @BeforeEach
     void setUp() {
@@ -20,6 +20,7 @@ class AppTest {
                 "+ task 02",
                 "x task 03",
                 "x task 04"));
+        app = new App();
     }
 
     @Nested

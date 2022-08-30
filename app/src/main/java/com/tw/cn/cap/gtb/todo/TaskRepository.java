@@ -40,5 +40,4 @@ public class TaskRepository {
             throw new TodoCannotReadFileException();
         }
     }
-
 }

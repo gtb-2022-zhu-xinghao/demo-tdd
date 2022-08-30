@@ -15,7 +15,7 @@ public class App {
 
     public List<String> run(String... args) {
         if (args.length > 0 && ADD.equals(args[0])) {
-            return new AddCommand(args).execute();
+            return new AddCommand(new TaskRepository(), args).execute();
         }
         return new ListCommand().run();
     }
