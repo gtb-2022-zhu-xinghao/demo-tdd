@@ -16,4 +16,6 @@
 ## add command
 
 ### 添加task name，只支持一个task 
+    #### 从常量到变量，固定的taskName到输入参数
+
 
