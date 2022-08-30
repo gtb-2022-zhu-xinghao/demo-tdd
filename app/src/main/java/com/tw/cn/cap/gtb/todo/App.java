@@ -18,15 +18,19 @@ public class App {
 
     public List<String> run(String... args) {
         if (args.length > 0 && args[0].equals("add")) {
-            try(final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH, StandardOpenOption.APPEND);) {
-                bw.write("+ foobar");
-                bw.newLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return execute(args);
         }
-
         return listCommand.run();
     }
 
+    private List<String> execute(String[] args) {
+        try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH, StandardOpenOption.APPEND);) {
+            final String taskName = args[1];
+            bw.write("+ " + taskName);
+            bw.newLine();
+        } catch (IOException e) {
+            throw new TodoCannotReadFileException();
+        }
+        return List.of();
+    }
 }
