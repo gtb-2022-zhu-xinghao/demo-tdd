@@ -1,7 +1,9 @@
 package com.tw.cn.cap.gtb.todo;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,16 @@ public class TaskRepository {
         }
         return tasks;
     }
+    List<String> createTask(Task task) {
+        final String taskName = task.getName();
+        try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH, StandardOpenOption.APPEND)) {
+            bw.write("+ " + taskName);
+            bw.newLine();
+        } catch (IOException e) {
+            throw new TodoCannotReadFileException();
+        }
+        return List.of();
+    }
 
     List<String> readTasksLines() {
         try {
@@ -28,4 +40,5 @@ public class TaskRepository {
             throw new TodoCannotReadFileException();
         }
     }
+
 }
