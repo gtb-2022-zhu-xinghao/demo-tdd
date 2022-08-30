@@ -6,43 +6,35 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class AddCommandTest {
 
-    private MyTaskRepository taskRepository;
+    private TaskRepository taskRepository;
 
     @BeforeEach
     void setUp() {
-        taskRepository = new MyTaskRepository();
+        taskRepository = mock(TaskRepository.class);
     }
 
     @Test
     void should_multiple_words_as_name() {
-        final AddCommand command = new AddCommand(taskRepository, "add", "fizz", "buzz");
+        final AddCommand command = createCommandFrom("add", "fizz", "buzz");
         command.execute();
-
-        assertEquals("fizz buzz", taskRepository.getTaskName());
+        verify(taskRepository).createTask(new Task(0,"fizz buzz",false));
     }
     @Test
     void should_use_empty_name_when_no_args_provided() {
 
-        final AddCommand command = new AddCommand(taskRepository, "add");
+        final AddCommand command = createCommandFrom("add");
         command.execute();
-
-        assertEquals("", taskRepository.getTaskName());
+        verify(taskRepository).createTask(new Task(0,"",false));
     }
 
-    private static class MyTaskRepository extends TaskRepository {
-        private Task task;
-
-        @Override
-        List<String> createTask(Task task) {
-            this.task = task;
-            return List.of();
-        }
-
-        public String getTaskName() {
-            return this.task.getName();
-        }
+    private AddCommand createCommandFrom(String... args) {
+        final AddCommand command = new AddCommand(taskRepository, args);
+        return command;
     }
+
 }

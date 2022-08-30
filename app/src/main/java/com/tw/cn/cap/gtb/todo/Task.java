@@ -1,5 +1,7 @@
 package com.tw.cn.cap.gtb.todo;
 
+import java.util.Objects;
+
 /**
  * @author zxh
  */
@@ -30,5 +32,22 @@ public class Task {
 
     String format() {
         return String.format("%d %s", getId(), getName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Task task = (Task) o;
+        return id == task.id && isCompleted == task.isCompleted && Objects.equals(name, task.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, isCompleted);
     }
 }
