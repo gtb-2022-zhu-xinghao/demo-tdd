@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class TaskRepository {
     List<Task> loadTasks() {
-        final List<Task> tasks = new ArrayList<Task>();
+        final List<Task> tasks = new ArrayList<>();
         final List<String> lines = readTasksLines();
         for (int i = 0; i < lines.size(); i++) {
             final int id = i + 1;

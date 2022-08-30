@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.util.List;
 
 class AppTest {
+    final App app = new App();
+
     @BeforeEach
     void setUp() {
         writeDateFile(List.of(
@@ -26,7 +28,7 @@ class AppTest {
         class IfFileExistingTasks {
             @Test
             void should_list_existing_tasks() {
-                final List<String> result = new App().run();
+                final List<String> result = app.run();
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "1 task 01",
@@ -42,16 +44,28 @@ class AppTest {
     class AddCommand {
         @Nested
         class SupportSingleWordAsTaskName {
-
             @Test
             void should_add_task_with_single_word_as_name() {
-                new App().run("add", "foobar");
+                app.run("add", "foobar");
                 final List<String> result = new App().run();
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "1 task 01",
                         "2 task 02",
                         "5 foobar",
+                        "# Completed",
+                        "3 task 03",
+                        "4 task 04"), result);
+            }
+            @Test
+            void should_add_task_with_multiple_word_as_name() {
+                app.run("add", "foobar","fizz");
+                final List<String> result = new App().run();
+                Assertions.assertEquals(List.of(
+                        "# To be done",
+                        "1 task 01",
+                        "2 task 02",
+                        "5 foobar fizz",
                         "# Completed",
                         "3 task 03",
                         "4 task 04"), result);
