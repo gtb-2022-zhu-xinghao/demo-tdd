@@ -73,6 +73,24 @@ class AppTest {
             }
         }
     }
+    @Nested
+    class RemoveCommand {
+
+        @Nested
+        class WhenRemoveSingleTask {
+            @Test
+            void should_remove_single_id () {
+                app.run( "remove","1");
+                final List<String> result = app.run();
+                Assertions.assertEquals(List.of(
+                        "# To be done",
+                        "2 task 02",
+                        "# Completed",
+                        "3 task 03",
+                        "4 task 04"), result);
+            }
+        }
+    }
 
     private void writeDateFile(List<String> lines) {
         try (BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH)) {

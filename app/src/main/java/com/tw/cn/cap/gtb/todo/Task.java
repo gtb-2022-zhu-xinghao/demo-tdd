@@ -9,7 +9,7 @@ public class Task {
     private final long id;
     private final String name;
     private final boolean isCompleted;
-    private final boolean deleted;
+    private boolean deleted;
 
 
     public Task(long id, String name, boolean isCompleted, boolean isDeleted) {
@@ -64,5 +64,9 @@ public class Task {
 
     public boolean isDeleted() {
         return this.deleted;
+    }
+
+    public void delete() {
+        this.deleted = true;
     }
 }

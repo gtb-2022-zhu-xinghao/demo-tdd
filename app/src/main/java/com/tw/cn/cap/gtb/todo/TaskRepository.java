@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zxh
@@ -17,7 +18,7 @@ public class TaskRepository {
         for (int i = 0; i < lines.size(); i++) {
             tasks.add(TaskMarshaller.unmarshal(lines.get(i), i + 1));
         }
-        return tasks;
+        return tasks.stream().filter(task -> !task.isDeleted()).collect(Collectors.toList());
     }
 
     List<String> createTask(Task task) {
