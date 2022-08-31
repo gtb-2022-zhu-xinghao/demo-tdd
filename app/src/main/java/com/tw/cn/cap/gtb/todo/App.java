@@ -10,6 +10,7 @@ public class App {
 
 
     public static final String ADD = "add";
+    public static final String REMOVE = "remove";
 
     public static void main(String[] args) {
         new App().run().forEach(System.out::println);
@@ -24,7 +25,7 @@ public class App {
             final String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
             return new AddCommand(new TaskRepository(), restArgs).execute();
         }
-        if ("remove".equals(args[0])) {
+        if (REMOVE.equals(args[0])) {
             final String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
             return new RemoveCommand(new TaskRepository(), restArgs).execute();
         }

@@ -20,8 +20,7 @@ public class RemoveCommand {
 
     public List<String> execute() {
         final List<Task> tasks = taskRepository.loadTasks();
-        final String id = restArgs[0];
-        tasks.stream().filter(task -> Integer.parseInt(id) == task.getId()).forEach(Task::delete);
+        tasks.stream().filter(task -> Integer.parseInt(restArgs[0]) == task.getId()).forEach(Task::delete);
         try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH)) {
             for (var task:tasks){
                 bw.write(TaskMarshaller.marshal(task));

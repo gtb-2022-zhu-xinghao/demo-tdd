@@ -23,8 +23,7 @@ public class TaskRepository {
 
     List<String> createTask(Task task) {
         try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH, StandardOpenOption.APPEND)) {
-            final String line = TaskMarshaller.marshal(task);
-            bw.write(line);
+            bw.write(TaskMarshaller.marshal(task));
             bw.newLine();
         } catch (IOException e) {
             throw new TodoCannotReadFileException();
