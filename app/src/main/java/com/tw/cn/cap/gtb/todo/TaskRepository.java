@@ -11,21 +11,20 @@ import java.util.List;
  * @author zxh
  */
 public class TaskRepository {
+    private final TaskMarshaller taskMarshaller = new TaskMarshaller();
+
     List<Task> loadTasks() {
         final List<Task> tasks = new ArrayList<>();
         final List<String> lines = readTasksLines();
         for (int i = 0; i < lines.size(); i++) {
-            final int id = i + 1;
-            final String line = lines.get(i);
-            final Task task = TaskMarshaller.unmarshal(line, id);
-            tasks.add(task);
+            tasks.add(taskMarshaller.unmarshal(lines.get(i), i + 1));
         }
         return tasks;
     }
 
     List<String> createTask(Task task) {
         try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH, StandardOpenOption.APPEND)) {
-            final String line = TaskMarshaller.marshal(task);
+            final String line = taskMarshaller.marshal(task);
             bw.write(line);
             bw.newLine();
         } catch (IOException e) {
