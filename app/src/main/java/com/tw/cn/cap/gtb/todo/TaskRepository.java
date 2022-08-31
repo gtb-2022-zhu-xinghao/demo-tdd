@@ -17,7 +17,7 @@ public class TaskRepository {
         for (int i = 0; i < lines.size(); i++) {
             final int id = i + 1;
             final String line = lines.get(i);
-            final Task task = TaskFactory.createTask(line, id);
+            final Task task = TaskMarshaller.unmarshal(line, id);
             tasks.add(task);
         }
         return tasks;
@@ -25,7 +25,7 @@ public class TaskRepository {
 
     List<String> createTask(Task task) {
         try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH, StandardOpenOption.APPEND)) {
-            final String line = TaskFactory.marshal(task);
+            final String line = TaskMarshaller.marshal(task);
             bw.write(line);
             bw.newLine();
         } catch (IOException e) {

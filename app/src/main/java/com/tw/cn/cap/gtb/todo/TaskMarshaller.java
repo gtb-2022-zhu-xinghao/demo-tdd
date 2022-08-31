@@ -3,14 +3,14 @@ package com.tw.cn.cap.gtb.todo;
 /**
  * @author zxh
  */
-public class TaskFactory {
-    private TaskFactory() {
+public class TaskMarshaller {
+    private TaskMarshaller() {
     }
     static String marshal(Task task) {
         return "+ " + task.getName();
     }
 
-   static Task createTask(String line, int id) {
+   static Task unmarshal(String line, int id) {
         final String[] fields = line.split(" ", 2);
         final String name = fields[1];
         final boolean isCompleted = fields[0].equals("x");

@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TaskFactoryTest {
+class TaskMarshallerTest {
     @Test
     void should_parse_completed_tasks() {
-        final boolean isCompleted = TaskFactory.createTask("+ foo", 1).isCompleted();
+        final boolean isCompleted = TaskMarshaller.unmarshal("+ foo", 1).isCompleted();
         assertFalse(isCompleted);
     }
     @Test
     void should_support_name_with_multiple_white_spaces() {
-        final String result = TaskFactory.createTask("+    foo bar     ", 1).getName();
+        final String result = TaskMarshaller.unmarshal("+    foo bar     ", 1).getName();
         assertEquals("   foo bar     ", result);
     }
 }
