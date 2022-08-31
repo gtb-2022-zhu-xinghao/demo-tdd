@@ -1,4 +1,5 @@
 package com.tw.cn.cap.gtb.todo;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,7 +16,8 @@ public class App {
 
     public List<String> run(String... args) {
         if (args.length > 0 && ADD.equals(args[0])) {
-            return new AddCommand(new TaskRepository(), args).execute();
+            Arrays.copyOfRange(args, 1, args.length)
+            return new AddCommand(new TaskRepository(), restArgs).execute();
         }
         return new ListCommand().run();
     }

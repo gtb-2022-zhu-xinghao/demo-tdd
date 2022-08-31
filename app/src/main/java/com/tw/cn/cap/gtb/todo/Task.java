@@ -8,12 +8,8 @@ import java.util.Objects;
 public class Task {
     private final long id;
     private final String name;
-
     private final boolean isCompleted;
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
 
     public Task(long id, String name, boolean isCompleted) {
         this.id = id;
@@ -21,6 +17,9 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
     public long getId() {
         return id;
     }
@@ -32,6 +31,11 @@ public class Task {
 
     String format() {
         return String.format("%d %s", getId(), getName());
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + isCompleted + " " + name;
     }
 
     @Override
@@ -50,4 +54,5 @@ public class Task {
     public int hashCode() {
         return Objects.hash(id, name, isCompleted);
     }
+
 }

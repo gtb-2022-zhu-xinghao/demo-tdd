@@ -1,6 +1,5 @@
 package com.tw.cn.cap.gtb.todo;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,7 +16,8 @@ public class AddCommand {
     }
 
     List<String> execute() {
-        final String name = String.join(" ",Arrays.copyOfRange(args, 1, args.length));
-        return taskRepository.createTask(new Task(0, name, false));
+        final String name = String.join(" ",args);
+        taskRepository.createTask(new Task(0, name, false));
+        return List.of();
     }
 }

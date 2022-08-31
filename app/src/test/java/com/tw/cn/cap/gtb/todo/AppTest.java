@@ -48,7 +48,7 @@ class AppTest {
             @Test
             void should_add_task_with_single_word_as_name() {
                 app.run("add", "foobar");
-                final List<String> result = new App().run();
+                final List<String> result = app.run();
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "1 task 01",
