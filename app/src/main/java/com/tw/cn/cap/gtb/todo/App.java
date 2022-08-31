@@ -16,7 +16,7 @@ public class App {
 
     public List<String> run(String... args) {
         if (args.length > 0 && ADD.equals(args[0])) {
-            Arrays.copyOfRange(args, 1, args.length)
+            final String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
             return new AddCommand(new TaskRepository(), restArgs).execute();
         }
         return new ListCommand().run();
