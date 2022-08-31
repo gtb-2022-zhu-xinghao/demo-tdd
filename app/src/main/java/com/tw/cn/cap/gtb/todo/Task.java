@@ -11,7 +11,6 @@ public class Task {
     private final boolean completed;
     private boolean deleted;
 
-
     public Task(long id, String name, boolean completed, boolean isDeleted) {
         this.id = id;
         this.name = name;
@@ -29,7 +28,6 @@ public class Task {
     public String getName() {
         return name;
     }
-
 
     String format() {
         return String.format("%d %s", getId(), getName());
