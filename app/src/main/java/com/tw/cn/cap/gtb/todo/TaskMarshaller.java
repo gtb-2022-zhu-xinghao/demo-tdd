@@ -17,6 +17,7 @@ public class TaskMarshaller {
 
 
     static String marshal(Task task) {
-        return "+ " + task.getName();
+        final String completedSign = task.isCompleted() ? "x" : "+";
+        return completedSign + " " + task.getName();
     }
 }
