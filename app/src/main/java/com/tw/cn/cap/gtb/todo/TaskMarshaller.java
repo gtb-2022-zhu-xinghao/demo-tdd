@@ -9,15 +9,18 @@ public class TaskMarshaller {
     }
 
     static Task unmarshal(String line, int id) {
-        final String[] fields = line.split(" ", 2);
-        final String name = fields[1];
+        final String[] fields = line.split(" ", 3);
+        final String name = fields[2];
         final boolean isCompleted = "x".equals(fields[0]);
-        return new Task(id, name,isCompleted,false);
+        final boolean deleteSign = "x".equals(fields[1]);
+        return new Task(id, name,isCompleted,deleteSign);
     }
 
 
     static String marshal(Task task) {
         final String completedSign = task.isCompleted() ? "x" : "+";
-        return completedSign + " " + task.getName();
+        final String deleteSign = task.isDeleted() ? "x" : "+";
+
+        return completedSign + " " +  deleteSign + " " + task.getName();
     }
 }

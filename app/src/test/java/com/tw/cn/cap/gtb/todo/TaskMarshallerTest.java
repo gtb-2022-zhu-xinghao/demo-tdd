@@ -24,9 +24,11 @@ class TaskMarshallerTest {
     }
     public static Stream<Arguments> lines_and_tasks() {
         return Stream.of(
-                Arguments.of("+ foo",new Task(0,"foo",false,false)),
-                Arguments.of("x foo",new Task(0,"foo",true,false)),
-                Arguments.of("+    foo bar     ",new Task(0,"   foo bar     ",false,false))
+                Arguments.of("+ + foo",new Task(0,"foo",false,false)),
+                Arguments.of("x + foo",new Task(0,"foo",true,false)),
+                Arguments.of("+ x foo",new Task(0,"foo",false,true)),
+                Arguments.of("x x foo",new Task(0,"foo",true,true)),
+                Arguments.of("+ +    foo bar     ",new Task(0,"   foo bar     ",false,false))
         );
     }
 }

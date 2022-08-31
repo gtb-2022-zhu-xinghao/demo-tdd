@@ -16,10 +16,10 @@ class AppTest {
     @BeforeEach
     void setUp() {
         writeDateFile(List.of(
-                "+ task 01",
-                "+ task 02",
-                "x task 03",
-                "x task 04"));
+                "+ + task 01",
+                "+ + task 02",
+                "x + task 03",
+                "x + task 04"));
         app = new App();
     }
 
@@ -47,7 +47,7 @@ class AppTest {
         class SupportSingleWordAsTaskName {
             @Test
             void should_add_task_with_single_word_as_name() {
-                app.run("add", "foobar");
+                app.run( "add","foobar");
                 final List<String> result = app.run();
                 Assertions.assertEquals(List.of(
                         "# To be done",
@@ -60,7 +60,7 @@ class AppTest {
             }
             @Test
             void should_add_task_with_multiple_word_as_name() {
-                app.run("add", "foobar","fizz");
+                app.run("add","foobar","fizz");
                 final List<String> result = new App().run();
                 Assertions.assertEquals(List.of(
                         "# To be done",
