@@ -36,6 +36,19 @@ public class TaskRepository {
         return List.of();
     }
 
+    void deleteTask(int id) {
+        final List<Task> tasks = loadAllTasks();
+        tasks.stream().filter(task -> id == task.getId()).forEach(Task::delete);
+        try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH)) {
+            for (var task : tasks) {
+                bw.write(TaskMarshaller.marshal(task));
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            throw new TodoCannotReadFileException();
+        }
+    }
+
     List<String> readTasksLines() {
         try {
             return Files.readAllLines(Constant.TASKS_FILE_PATH);
@@ -44,16 +57,4 @@ public class TaskRepository {
         }
     }
 
-    void deleteTask(int id) {
-        final List<Task> tasks = loadAllTasks();
-        tasks.stream().filter(task -> id == task.getId()).forEach(Task::delete);
-        try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH)) {
-            for (var task:tasks){
-                bw.write(TaskMarshaller.marshal(task));
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            throw new TodoCannotReadFileException();
-        }
-    }
 }
