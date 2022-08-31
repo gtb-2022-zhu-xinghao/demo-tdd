@@ -6,8 +6,11 @@ package com.tw.cn.cap.gtb.todo;
 public class TaskFactory {
     private TaskFactory() {
     }
+    static String marshal(Task task) {
+        return "+ " + task.getName();
+    }
 
-   public static Task createTask(String line, int id) {
+   static Task createTask(String line, int id) {
         final String[] fields = line.split(" ", 2);
         final String name = fields[1];
         final boolean isCompleted = fields[0].equals("x");

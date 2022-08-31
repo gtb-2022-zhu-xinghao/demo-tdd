@@ -22,10 +22,11 @@ public class TaskRepository {
         }
         return tasks;
     }
+
     List<String> createTask(Task task) {
-        final String taskName = task.getName();
         try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH, StandardOpenOption.APPEND)) {
-            bw.write("+ " + taskName);
+            final String line = TaskFactory.marshal(task);
+            bw.write(line);
             bw.newLine();
         } catch (IOException e) {
             throw new TodoCannotReadFileException();
