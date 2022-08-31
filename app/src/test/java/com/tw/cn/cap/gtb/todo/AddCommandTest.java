@@ -22,14 +22,14 @@ class AddCommandTest {
     void should_multiple_words_as_name() {
         final AddCommand command = createCommandFrom( "fizz", "buzz");
         command.execute();
-        verify(taskRepository).createTask(new Task(0,"fizz buzz",false));
+        verify(taskRepository).createTask(new Task(0,"fizz buzz",false,false));
     }
     @Test
     void should_use_empty_name_when_no_args_provided() {
 
         final AddCommand command = createCommandFrom("");
         command.execute();
-        verify(taskRepository).createTask(new Task(0,"",false));
+        verify(taskRepository).createTask(new Task(0,"",false,false));
     }
 
     private AddCommand createCommandFrom(String... args) {

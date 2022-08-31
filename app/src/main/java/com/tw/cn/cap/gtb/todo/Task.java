@@ -9,12 +9,14 @@ public class Task {
     private final long id;
     private final String name;
     private final boolean isCompleted;
+    private final boolean deleted;
 
 
-    public Task(long id, String name, boolean isCompleted) {
+    public Task(long id, String name, boolean isCompleted, boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.isCompleted = isCompleted;
+        this.deleted = isDeleted;
     }
 
     public boolean isCompleted() {
@@ -35,7 +37,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + " " + isCompleted + " " + name;
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isCompleted=" + isCompleted +
+                ", deleted=" + deleted +
+                '}';
     }
 
     @Override
@@ -47,12 +54,11 @@ public class Task {
             return false;
         }
         Task task = (Task) o;
-        return id == task.id && isCompleted == task.isCompleted && Objects.equals(name, task.name);
+        return id == task.id && isCompleted == task.isCompleted && deleted == task.deleted && Objects.equals(name, task.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isCompleted);
+        return Objects.hash(id, name, isCompleted, deleted);
     }
-
 }

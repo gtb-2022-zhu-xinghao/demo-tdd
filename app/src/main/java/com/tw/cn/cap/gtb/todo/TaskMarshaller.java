@@ -12,7 +12,7 @@ public class TaskMarshaller {
         final String[] fields = line.split(" ", 2);
         final String name = fields[1];
         final boolean isCompleted = "x".equals(fields[0]);
-        return new Task(id, name,isCompleted);
+        return new Task(id, name,isCompleted,false);
     }
 
 
