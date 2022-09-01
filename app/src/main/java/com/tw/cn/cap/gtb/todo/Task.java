@@ -21,8 +21,8 @@ public class Task {
     public boolean isCompleted() {
         return completed;
     }
-    public long getId() {
-        return id;
+    public int getId() {
+        return (int) id;
     }
 
     public String getName() {
