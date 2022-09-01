@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
  * @author zxh
  */
 public class TaskRepository {
-    List<Task> loadTasks() {
-        final List<Task> tasks = loadAllTasks();
+    List<Task> all() {
+        final List<Task> tasks = loadTasks();
         return tasks.stream().filter(task -> !task.isDeleted()).collect(Collectors.toList());
     }
 
-    private List<Task> loadAllTasks() {
+    private List<Task> loadTasks() {
         final List<Task> tasks = new ArrayList<>();
         final List<String> lines = readTasksLines();
         for (int i = 0; i < lines.size(); i++) {
@@ -37,7 +37,7 @@ public class TaskRepository {
     }
 
     void deleteTask(int id) {
-        final List<Task> tasks = loadAllTasks();
+        final List<Task> tasks = loadTasks();
         tasks.stream().filter(task -> id == task.getId()).forEach(Task::delete);
         try (final BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH)) {
             for (var task : tasks) {

@@ -11,7 +11,7 @@ public class ListCommand {
 
 
     List<String> run() {
-        final List<Task> tasks = taskRepository.loadTasks();
+        final List<Task> tasks = taskRepository.all();
         final List<String> result = new ArrayList<>();
         result.addAll(Section.tbd().format(tasks));
         result.addAll(Section.completed().format(tasks));
