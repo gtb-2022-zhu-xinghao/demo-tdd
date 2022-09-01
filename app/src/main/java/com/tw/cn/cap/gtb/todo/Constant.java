@@ -6,6 +6,9 @@ import java.nio.file.Path;
  * @author zxh
  */
 public class Constant {
+    public static final String ADD = "add";
+    public static final String REMOVE = "remove";
+
     private Constant() {
     }
 

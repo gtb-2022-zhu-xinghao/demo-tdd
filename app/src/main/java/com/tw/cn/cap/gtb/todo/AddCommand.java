@@ -5,14 +5,13 @@ import java.util.List;
 /**
  * @author zxh
  */
-public class AddCommand {
-    final TaskRepository taskRepository;
+public class AddCommand extends Command {
 
     private final String[] args;
 
     public AddCommand(TaskRepository taskRepository, String... args) {
+        super(taskRepository);
         this.args = args;
-        this.taskRepository = taskRepository;
     }
 
     List<String> execute() {

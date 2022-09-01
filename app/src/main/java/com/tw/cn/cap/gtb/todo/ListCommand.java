@@ -6,11 +6,14 @@ import java.util.List;
 /**
  * @author zxh
  */
-public class ListCommand {
-    final TaskRepository taskRepository = new TaskRepository();
+public class ListCommand extends Command {
 
+    public ListCommand(TaskRepository taskRepository) {
+        super(taskRepository);
+    }
 
-    List<String> run() {
+    @Override
+    List<String> execute() {
         final List<Task> tasks = taskRepository.all();
         final List<String> result = new ArrayList<>();
         result.addAll(Section.tbd().format(tasks));

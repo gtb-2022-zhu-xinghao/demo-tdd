@@ -29,7 +29,7 @@ class AppTest {
         class IfFileExistingTasks {
             @Test
             void should_list_existing_tasks() {
-                final List<String> result = app.run();
+                final List<String> result = app.run("list");
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "1 task 01",
@@ -48,7 +48,7 @@ class AppTest {
             @Test
             void should_add_task_with_single_word_as_name() {
                 app.run( "add","foobar");
-                final List<String> result = app.run();
+                final List<String> result = app.run("list");
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "1 task 01",
@@ -61,7 +61,7 @@ class AppTest {
             @Test
             void should_add_task_with_multiple_word_as_name() {
                 app.run("add","foobar","fizz");
-                final List<String> result = new App().run();
+                final List<String> result = app.run("list");
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "1 task 01",
@@ -81,7 +81,7 @@ class AppTest {
             @Test
             void should_remove_single_id () {
                 app.run( "remove","1");
-                final List<String> result = app.run();
+                final List<String> result = app.run("list");
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "2 task 02",
@@ -95,7 +95,7 @@ class AppTest {
             @Test
             void should_remove_multiple_task () {
                 app.run( "remove","1","3");
-                final List<String> result = app.run();
+                final List<String> result = app.run("list");
                 Assertions.assertEquals(List.of(
                         "# To be done",
                         "2 task 02",

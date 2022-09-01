@@ -7,15 +7,15 @@ import java.util.stream.Collectors;
 /**
  * @author zxh
  */
-public class RemoveCommand {
-    private final TaskRepository taskRepository;
+public class RemoveCommand extends Command{
     private final String[] restArgs;
 
     public RemoveCommand(TaskRepository taskRepository, String... restArgs) {
-        this.taskRepository = taskRepository;
+        super(taskRepository);
         this.restArgs = restArgs;
     }
 
+    @Override
     public List<String> execute() {
         final List<Integer> ids = Arrays.stream(restArgs)
                 .map(Integer::valueOf).toList();
