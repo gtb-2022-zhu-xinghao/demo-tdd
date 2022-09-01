@@ -104,6 +104,18 @@ class AppTest {
             }
         }
     }
+    
+    @Nested
+    class UnknownCommand {
+        @Nested
+        class WhenCmdNameIsUnknown {
+            @Test
+            void should_give_hint() {
+                final List<String> result = app.run("foobar");
+                Assertions.assertEquals(List.of("Unknown command: foobar!"), result);
+            }
+        }
+    }
 
     private void writeDateFile(List<String> lines) {
         try (BufferedWriter bw = Files.newBufferedWriter(Constant.TASKS_FILE_PATH)) {

@@ -6,6 +6,7 @@ import java.util.Arrays;
  * @author zxh
  */
 public class CommandFactory {
+
     private CommandFactory() {
     }
 
@@ -13,7 +14,10 @@ public class CommandFactory {
         final String[] restArgs = Arrays.copyOfRange(args, 1, args.length);
         final String commandName = args[0];
 
-        Command command = new ListCommand(repository);
+        Command command = new UnknownCommand(repository, commandName);
+        if (Constant.LIST.equals(commandName)) {
+            command = new ListCommand(repository);
+        }
         if (Constant.ADD.equals(commandName)) {
             command = new AddCommand(repository, restArgs);
         }

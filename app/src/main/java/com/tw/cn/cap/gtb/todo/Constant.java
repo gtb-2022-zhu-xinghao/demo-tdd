@@ -8,6 +8,7 @@ import java.nio.file.Path;
 public class Constant {
     public static final String ADD = "add";
     public static final String REMOVE = "remove";
+    public static final String LIST = "list";
 
     private Constant() {
     }
